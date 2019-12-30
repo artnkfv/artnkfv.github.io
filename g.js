@@ -15,14 +15,14 @@ function flipCard() {
   if (!hasFlippedCard) {
     hasFlippedCard = true;
     firstCard = this;
-    counter++;
-    count.innerText = "Attempts: " + counter;
+    // counter++;
+    // count.innerText = "Attempts: " + counter;
     return;
   }
 
   secondCard = this;
-  counter++;
-  count.innerText = "Attempts: " + counter;
+  // counter++;
+  // count.innerText = "Attempts: " + counter;
 
   checkForMatch();
 }
@@ -30,6 +30,8 @@ function flipCard() {
 function checkForMatch() {
   let isMatch = firstCard.dataset.info === secondCard.dataset.info;
   isMatch ? (disableCards(), restart()) : unflipCards();
+  counter++;
+  count.innerText = "Attempts: " + counter;
 }
 
 function disableCards() {
@@ -58,8 +60,11 @@ function resetGame() {
   counter = 0;
   count.innerText = "Attempts: " + counter;
   cards.forEach(card => card.addEventListener('click', flipCard));
+  cards.forEach(card => {
+    let randomCards = Math.floor(Math.random() * 12);
+    card.style.order = randomCards;
+  });
   button.style.display = 'none';
-  
 }
 
 function restart() {
